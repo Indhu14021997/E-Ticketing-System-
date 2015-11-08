@@ -13,5 +13,5 @@ $query="Insert into login values(NULL,'".$name."','".$pass."','1');";
 $c = new connect();
 $conn = $c->con();
 $result = $c->insert($conn, $query);
-Echo "Sign up completed";
+echo "Sign up completed\n";
 echo '<a href="Home.html">Go to the home page</a>.';
