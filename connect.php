@@ -23,9 +23,13 @@
                 return $conn;
             }
 
-            public function execute($con,$sql) {
+            public function execute($con, $sql) {
                 $result = $con->query($sql);
                 return $result;
+            }
+
+            public function insert($con, $sql) {
+                $con->query($sql);
             }
 
         }
