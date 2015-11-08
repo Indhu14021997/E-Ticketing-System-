@@ -18,12 +18,13 @@
             $result = $c->execute($conn, $query);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                        echo "Source: " . $row["source"] . " - Destination: " . $row["destination"] . " - Arrival: " . $row["arrival_time"] ." -Departure:  ".$row["departure_time"]." - Train No:". $row["train_no"] ."<br>";
-                    }
+                    echo "Source: " . $row["source"] . " - Destination: " . $row["destination"] . " - Arrival: " . $row["arrival_time"] . " -Departure:  " . $row["departure_time"] . " - Train No:" . $row["train_no"] . "<br>";
+                }
             } else {
                 echo "0 results\n";
-                echo '<a href="index.html">Go back to the main page</a>.';
             }
+            echo '<a href="indexUser.html">Go back to the main page</a>.';
+            echo '<a href="Home.html">Go back to the search page</a>.';
             ?>
 
 
