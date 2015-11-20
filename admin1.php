@@ -6,17 +6,16 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>login</title>
+        <title>admin1</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div>
-            <form action = "login.php" method="post">
-               Enter Your Name <input name="name" type="text">
-               Enter Password <input name="pass" type="password">
-               <input type="submit">                
-            </form>
+            <?php
+            include ("connect.php");
+            $query="Select * from ";
+            ?>
         </div>
     </body>
 </html>

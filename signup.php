@@ -9,9 +9,16 @@
 include ("connect.php");
 $name=$_POST["name"];
 $pass=$_POST["pass"];
-$query="Insert into login values(NULL,'".$name."','".$pass."','1');";
+$address=$_POST["address"];
+$phone=$_POST["phone"];
+$mail=$_POST["email"];
+$query1="Insert into login values('".$name."','".$pass."','1');";
+$query2="Insert into customer values(NULL,'".$name."','".$phone."','".$address."','".$mail."');";
+//echo $query1;
+//echo $query2;
 $c = new connect();
 $conn = $c->con();
-$result = $c->insert($conn, $query);
+$r=$c->insert($conn, $query1);
+$s=$c->insert($conn, $query2);
 echo "Sign up completed\n";
 echo '<a href="Home.html">Go to the home page</a>.';

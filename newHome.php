@@ -10,12 +10,9 @@
             <?php
             include ("connect.php");
             session_start();
-           // echo $_SESSION["id"];
+            // echo $_SESSION["id"];
             $source = $_POST["source"];
             $dest = $_POST["dest"];
-            $date=$_POST["date"];
-            $_SESSION['date']=$date;
-            $_SESSION['class']=$_POST["class"];
             $query = "Select * from route,schedule,station,train where route.source=\"" . $source . "\" and route.destination=\"" . $dest . "\" and route.id=schedule.RouteNo and schedule.station=station.id and schedule.trainNo=train.no;";
             echo "Source : " . $source . " Destination : " . $dest . "</br>";
             $c = new connect();
@@ -23,13 +20,13 @@
             $result = $c->execute($conn, $query);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo '<a href="details.php?name='.$row["name"].'&schedule='.$row["ScheduleNo"].'">' . $row["name"] . "  " . $row["Location"] . "  " . $row["Arrival"] . "  " . $row["Departure"] . "  " . $row["trainName"] . "  " . $row["freeSeat"] . "</a></br>";
+                    echo $row["name"] . "  " . $row["Location"] . "  " . $row["Arrival"] . "  " . $row["Departure"] . "  " . $row["trainName"] . "  " . $row["freeSeat"] . "</br>";
                     //$_SESSION['sVar'] = $row["name"];
                 }
             } else {
                 echo "0 results\n";
             }
-            echo '<a href="indexUser.html">Go back to the main page</a></br>.';
+            echo '<a href="index.html">Go back to the main page</a></br>.';
             echo '<a href="Home.html">Go back to the search page</a>.';
             ?>
 

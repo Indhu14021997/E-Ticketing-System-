@@ -9,11 +9,21 @@ include ("connect.php");
 $name = $_POST ["name"];
 $pass = $_POST ["pass"];
 $query = "Select * from login where Name=\"" . $name . "\" and Password=\"" . $pass . "\";";
+$q = "Select * from customer where name=\"" . $name . "\";";
 $c = new connect();
 $conn = $c->con();
 $result = $c->execute($conn, $query);
 if ($result->num_rows > 0) {
-    header('Location: Home.html');    
+    $row = $result->fetch_assoc();
+    if ($row["Class"] == 1) {
+        $r = $c->execute($conn, $q);
+        $val = $r->fetch_assoc();
+        session_start();
+        $_SESSION["id"] = $val["id"];
+        header('Location: Home.html');
+    } else if ($row["Class"] == 2) {
+        echo"Wrong";
+    }
 } else {
     echo "0 results\n";
     echo '<a href="index.html">Go back to the main page</a>.';
