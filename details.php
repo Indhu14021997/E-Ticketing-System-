@@ -33,6 +33,8 @@ and open the template in the editor.
                 $r = $c->insert($conn, $query);
                 echo "Booking Done\n";
                 echo "Prices ".$row["TicketPrice"];
+            }else{
+                echo "No Suitable seats found";
             }
 
             //   echo $station;
