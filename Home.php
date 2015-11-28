@@ -8,7 +8,7 @@
         <div>
 
             <?php
-            include ("connect.php");
+            include ("client.php");
             session_start();
            // echo $_SESSION["id"];
             $source = $_POST["source"];
@@ -16,6 +16,9 @@
             $date=$_POST["date"];
             $_SESSION['date']=$date;
             $_SESSION['class']=$_POST["class"];
+            $client=new client();
+            $client->getSchedule($source, $dest);
+            /*
             $query = "Select * from route,schedule,station,train where route.source=\"" . $source . "\" and route.destination=\"" . $dest . "\" and route.id=schedule.RouteNo and schedule.station=station.id and schedule.trainNo=train.no;";
             echo "Source : " . $source . " Destination : " . $dest . "</br>";
             $c = new connect();
@@ -28,7 +31,7 @@
                 }
             } else {
                 echo "0 results\n";
-            }
+            }*/
             echo '<a href="indexUser.html">Go back to the main page</a></br>.';
             echo '<a href="Home.html">Go back to the search page</a>.';
             ?>

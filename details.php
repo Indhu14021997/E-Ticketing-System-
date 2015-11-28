@@ -14,15 +14,24 @@ and open the template in the editor.
 
         <div>
             <?php
-            include ("connect.php");
+           // include ("connect.php");
+            include ("client.php");
             session_start();
             $user = $_SESSION["id"];
             $date = $_SESSION["date"];
             $class = $_SESSION["class"];
-            //echo $date;
+            echo $class;
+            echo $date;
             $station = $_GET['name'];
+            echo $station;
             $schedule = $_GET['schedule'];
-            $q = "Select * from seat,schedule,class where schedule.ScheduleNo=" . $schedule . " and schedule.trainNo=seat.TrainNo and seat.empty=0 and class.classNo=".$class.";";
+            $client=new client();
+            $clientName=$client->getName($user);
+            $client->details($clientName);
+            /*
+             * 
+            $q = "Select * from seat,schedule,class where schedule.ScheduleNo=" . $schedule . " and schedule.trainNo=seat.TrainNo and seat.empty=0 and class.classNo=" . $class . ";";
+            echo $q;
             $c = new connect();
             $conn = $c->con();
             $result = $c->execute($conn, $q);
@@ -32,11 +41,11 @@ and open the template in the editor.
                 //echo $query;
                 $r = $c->insert($conn, $query);
                 echo "Booking Done\n";
-                echo "Prices ".$row["TicketPrice"];
-            }else{
+                echo "Prices " . $row["TicketPrice"];
+            } else {
                 echo "No Suitable seats found";
             }
-
+*/
             //   echo $station;
             //echo"</br>";
             // echo $train;

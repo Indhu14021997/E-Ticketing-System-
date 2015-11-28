@@ -43,6 +43,16 @@ class client {
         return false;
     }
 
+    public function getName($id) {
+        $query = "Select name from customer where id='" . $id . "';";
+        $result = $this->c->execute($this->conn, $query);
+        if ($result->num_rows > 0) {
+           $row=$result->fetch_assoc();
+           return $row["name"];
+        }
+        return 0;
+    }
+
     public function details($name) {
         if (self::exists($name)) {
             $query = "Select * from customer where Name='" . $name . "';";
@@ -55,6 +65,18 @@ class client {
                 echo "Address : " . $row["address"] . "</br>";
                 echo "Email : " . $row["mail"] . "</br>";
             }
+        }
+    }
+
+    public function getSchedule($source, $destination) {
+        $query = "Select * from route,schedule,station,train where route.source=\"" . $source . "\" and route.destination=\"" . $destination . "\" and route.id=schedule.RouteNo and schedule.station=station.id and schedule.trainNo=train.no;";
+        $result = $this->c->execute($this->conn, $query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<a href="details.php?name=' . $row["name"] . '&schedule=' . $row["ScheduleNo"] . '">' . $row["name"] . "  " . $row["Location"] . "  " . $row["Arrival"] . "  " . $row["Departure"] . "  " . $row["trainName"] . "  " . $row["freeSeat"] . "</a></br>";
+            }
+        } else {
+            echo "0 results\n";
         }
     }
 
