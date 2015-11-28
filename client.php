@@ -47,8 +47,8 @@ class client {
         $query = "Select name from customer where id='" . $id . "';";
         $result = $this->c->execute($this->conn, $query);
         if ($result->num_rows > 0) {
-           $row=$result->fetch_assoc();
-           return $row["name"];
+            $row = $result->fetch_assoc();
+            return $row["name"];
         }
         return 0;
     }
@@ -64,6 +64,7 @@ class client {
                 echo "Phone : " . $row["phone"] . "</br>";
                 echo "Address : " . $row["address"] . "</br>";
                 echo "Email : " . $row["mail"] . "</br>";
+                echo "Booked : " . $row["booked"] . "</br>";
             }
         }
     }
@@ -77,6 +78,22 @@ class client {
             }
         } else {
             echo "0 results\n";
+        }
+    }
+
+    public function makeBooking($schedule, $class, $seatAmounts) {
+        $query = "Select COUNT(*) from seat where seat.empty=0 and seat.schedule='" . $schedule . "' and seat.ClassNo='" . $class . "';";
+        // echo $query;
+        $result = $this->c->execute($this->conn, $query);
+        $row = $result->fetch_assoc();
+        // echo $row["COUNT(*)"]." ".$seatAmounts;
+        if ((int) $row["COUNT(*)"] >= $seatAmounts) {
+            $query="Select TicketPrice from class where classNo='".$class."';";
+            $result=$this->c->execute($this->conn, $query);
+            $r=$result->fetch_assoc();
+            echo "Total Cost : ".$seatAmounts*$r["TicketPrice"];
+        } else {
+            echo "Not enought seats </br>";
         }
     }
 

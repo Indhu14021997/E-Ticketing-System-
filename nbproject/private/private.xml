@@ -5,14 +5,11 @@
         <group>
             <file>file:/opt/lampp/htdocs/Netbeans/newHome.html</file>
             <file>file:/opt/lampp/htdocs/Netbeans/newHome.php</file>
-            <file>file:/opt/lampp/htdocs/Netbeans/login.php</file>
             <file>file:/opt/lampp/htdocs/Netbeans/details.php</file>
-            <file>file:/opt/lampp/htdocs/Netbeans/login.html</file>
-            <file>file:/opt/lampp/htdocs/Netbeans/Home.html</file>
-            <file>file:/opt/lampp/htdocs/Netbeans/connect.php</file>
+            <file>file:/opt/lampp/htdocs/Netbeans/indexUser.html</file>
             <file>file:/opt/lampp/htdocs/Netbeans/index.html</file>
             <file>file:/opt/lampp/htdocs/Netbeans/Home.php</file>
-            <file>file:/opt/lampp/htdocs/Netbeans/admin1.php</file>
+            <file>file:/opt/lampp/htdocs/Netbeans/client.php</file>
         </group>
     </open-files>
 </project-private>
