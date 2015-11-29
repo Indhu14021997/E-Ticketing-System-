@@ -131,7 +131,6 @@ class client {
         ;
         //echo $query;
         $result = $this->c->execute($this->conn, $query);
-
         if ($cost != -1) {
             $row = $result->fetch_assoc();
             $query = "Insert into booking values(NULL,'" . $date . "','" . $row["SeatNo"] . "','" . $user . "','0','" . $row["ScheduleNo"] . "');";
@@ -143,9 +142,18 @@ class client {
             $this->c->insert($this->conn, $query);
             $query = "Insert into payment values '" . $user . "','" . $cost . "';";
             $this->c->insert($this->conn, $query);
+            self::issueTicket($row["SeatNo"]);
         } else {
             echo "Not enought </br>";
         }
+    }
+
+    public function issueTicket($seat) {
+        $query = "Select ID from booking where seat_no='" . $seat . "';";
+        $result = $this->c->execute($this->conn, $query);
+        $row = $result->fetch_assoc();
+        $query = "Insert into ticket values(NULL," . $row["ID"] . ");";
+        $this->c->insert($this->conn, $query);        
     }
 
     public function sendMail($id, $string) {
