@@ -20,10 +20,10 @@ and open the template in the editor.
             $user = $_SESSION["id"];
             $date = $_SESSION["date"];
             $class = $_SESSION["class"];
-            $var;
+            $var = 0;
             //echo $class;
             //echo $date;
-            //echo $station;
+            //echo $station;/*
             if (!isset($_SESSION['schedule']) && empty($_SESSION['schedule'])) {
                 $_SESSION["schedule"] = $_GET['schedule'];
             }
@@ -32,6 +32,7 @@ and open the template in the editor.
             }
             $station = $_SESSION['station'];
             $schedule = $_SESSION['schedule'];
+           // echo $schedule;
             $client = new client();
             $clientName = $client->getName($user);
             if ($client->exists($clientName)) {
@@ -41,10 +42,10 @@ and open the template in the editor.
 
                     $var = $_SESSION["seats"];
                     echo "Number of tickets : " . $var . "</br>";
-                    $client->CheckBooking($schedule, $class, $var);
+                    $cost = $client->CheckBooking($schedule, $class, $var);
                 }
                 if (isset($_POST['sub'])) {
-                    echo"Submitted";
+                    $client->makeBooking($schedule, $class, $_SESSION["seats"], $date, $user);
                 }
             }
 
