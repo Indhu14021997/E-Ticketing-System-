@@ -12,10 +12,16 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <form action = "login.php" method="post">
-               Enter Your Name <input name="name" type="text">
-               Enter Password <input name="pass" type="password">
-               <input type="submit">                
+            <form name="Login Form" action = "login.php" method="post">
+                <div id="login">
+                    <fieldset>
+                        <legend>LOGIN</legend>
+                        <label>Username : <input name="name" type="text"><span>*</span></label>
+                        </br>
+                        <label>Password <input name="pass" type="password"><span>*</span></label></br>
+                        <input type="submit" value="Login"><span> 
+                    </fieldset>
+                </div>           
             </form>
         </div>
     </body>
