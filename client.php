@@ -12,6 +12,7 @@
  * @author eshan
  */
 include("connect.php");
+
 class client {
 
     public $c;
@@ -69,9 +70,9 @@ class client {
     }
 
     public function getSchedule($source, $destination) {
-        $_SESSION["schedule"]=NULL;
+        $_SESSION["schedule"] = NULL;
         $query = "Select * from route,schedule,station,train where route.source=\"" . $source . "\" and route.destination=\"" . $destination . "\" and route.id=schedule.RouteNo and schedule.station=station.id and schedule.trainNo=train.no and train.freeSeat>0;";
-        echo $query;
+        // echo $query;
         $result = $this->c->execute($this->conn, $query);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -92,7 +93,7 @@ class client {
             $query = "Select TicketPrice from class where classNo='" . $class . "';";
             $result = $this->c->execute($this->conn, $query);
             $r = $result->fetch_assoc();
-            echo "Total Cost : " . $seatAmounts * $r["TicketPrice"]."</br>";
+            echo "Total Cost : " . $seatAmounts * $r["TicketPrice"] . "</br>";
             return $seatAmounts * $r["TicketPrice"];
         } else {
             echo "Not enought seats </br>";
@@ -101,39 +102,61 @@ class client {
     }
 
     public function makeBooking($schedule, $class, $seatAmounts, $date, $user) {
-        $query = "Select COUNT(*) from seat where seat.empty=0 and seat.schedule='" . $schedule . "' and seat.ClassNo='" . $class . "';";
-        // echo $query;
+        $query = "Select booked from customer where id=" . $user . ";";
         $result = $this->c->execute($this->conn, $query);
         $row = $result->fetch_assoc();
-        // echo $row["COUNT(*)"]." ".$seatAmounts;
-        // 
-        //echo $seatAmounts;
-        $cost = self::checkBooking($schedule, $class, $seatAmounts);
-        if ((int) $row["COUNT(*)"] >= $seatAmounts) {
-            $count = 0;
-            while ($count < $seatAmounts) {
-                self::booking($schedule, $class, $cost, $date, $user);
-                $count++;
+        if((int)$row["booked"]<6) {
+            $query = "Select COUNT(*) from seat where seat.empty=0 and seat.schedule='" . $schedule . "' and seat.ClassNo='" . $class . "';";
+            $result = $this->c->execute($this->conn, $query);
+            $row = $result->fetch_assoc();
+            $cost = self::checkBooking($schedule, $class, $seatAmounts);
+            if ((int) $row["COUNT(*)"] >= $seatAmounts) {
+                $count = 0;
+                while ($count < $seatAmounts) {
+                    self::booking($schedule, $class, $cost, $date, $user);
+                    $count++;
+                }
+                $query = "Update customer set booked=booked+" . $seatAmounts . " where id=" . $user . ";";
+                $this->c->insert($this->conn, $query);
+                echo "Booking Made </br>";
+                self::sendMail($user, "Booking made");
             }
+        }else{
+        echo "Booking Limit Exceeded";
         }
-        echo "Booking Made";
     }
 
-    public function booking($schedule, $class,$cost, $date, $user) {
+    public function booking($schedule, $class, $cost, $date, $user) {
         $query = "Select * from seat,schedule,class where schedule.ScheduleNo=" . $schedule . " and schedule.ScheduleNo=seat.schedule and seat.empty=0 and class.classNo='" . $class . "' and class.classNo=seat.ClassNo;";
         ;
         //echo $query;
         $result = $this->c->execute($this->conn, $query);
-        
+
         if ($cost != -1) {
             $row = $result->fetch_assoc();
             $query = "Insert into booking values(NULL,'" . $date . "','" . $row["SeatNo"] . "','" . $user . "','0','" . $row["ScheduleNo"] . "');";
             //echo $query;
             $this->c->insert($this->conn, $query);
-            $query="Update seat set empty=1 where SeatNo='".$row["SeatNo"]."';";
+            $query = "Update seat set empty=1 where SeatNo='" . $row["SeatNo"] . "';";
+            $this->c->insert($this->conn, $query);
+            $query = "Update train set freeSeat=freeSeat-1 where no='" . $row["trainNo"] . "' and freeSeat>0 ;";
+            $this->c->insert($this->conn, $query);
+            $query = "Insert into payment values '" . $user . "','" . $cost . "';";
             $this->c->insert($this->conn, $query);
         } else {
             echo "Not enought </br>";
+        }
+    }
+
+    public function sendMail($id, $string) {
+        $query = "Select mail from customer where id=" . $id . ";";
+        $result = $this->c->execute($this->conn, $query);
+        $row = $result->fetch_assoc();
+        $mail = "\"" . $row["mail"] . "\"";
+        //echo $mail;
+        //echo $string;
+        if (mail($mail, 'Booking Made', $string)) {
+            echo "done";
         }
     }
 
