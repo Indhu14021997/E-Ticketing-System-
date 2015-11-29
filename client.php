@@ -105,7 +105,7 @@ class client {
         $query = "Select booked from customer where id=" . $user . ";";
         $result = $this->c->execute($this->conn, $query);
         $row = $result->fetch_assoc();
-        if((int)$row["booked"]<6) {
+        if ((int) $row["booked"] < 6) {
             $query = "Select COUNT(*) from seat where seat.empty=0 and seat.schedule='" . $schedule . "' and seat.ClassNo='" . $class . "';";
             $result = $this->c->execute($this->conn, $query);
             $row = $result->fetch_assoc();
@@ -121,8 +121,8 @@ class client {
                 echo "Booking Made </br>";
                 self::sendMail($user, "Booking made");
             }
-        }else{
-        echo "Booking Limit Exceeded";
+        } else {
+            echo "Booking Limit Exceeded";
         }
     }
 
@@ -157,6 +157,17 @@ class client {
         //echo $string;
         if (mail($mail, 'Booking Made', $string)) {
             echo "done";
+        }
+    }
+
+    public function listBookings($id) {
+        $query = "Select * from booking,schedule,route,train,class,seat,payment where booking.customerNo=" . $id . " and booking.ScheduleNo=schedule.ScheduleNo and schedule.routeNo=route.id and schedule.trainNo=train.no and booking.seat_no=seat.SeatNo and seat.ClassNo=class.classNo and payment.customerNo=booking.customerNo;";
+        // echo $query;
+        $result = $this->c->execute($this->conn, $query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "Date : " . $row["date"] . " Seat No : " . $row["seat_no"] . " Train : " . $row["trainName"] . " Arrival Time : " . $row["Arrival"] . " Departure Time : " . $row["Departure"] . " Source : " . $row["source"] . " Destination : " . $row["destination"] . " Ticket Class : " . $row["ClassName"] . " Price : " . $row["TicketPrice"] . "</br>";
+            }
         }
     }
 
