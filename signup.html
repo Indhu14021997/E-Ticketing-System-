@@ -6,23 +6,32 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Sign up</title>
+        <title>login</title>
+        <link rel="stylesheet" type="text/css" href="Login.css"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css" >
+            h2{letter-spacing: 10px; font-size: .2in}
+            span{color: red}
+            form{box-alignment: left;}
+
+        </style>
     </head>
     <body>
         <div>
-            <form action="signup.php" method="post">
-                Enter Your Name    <input name="name" type="text">
-                </br>
-                Enter Password     <input name="pass" type="password">
-                </br>
-                Enter Your Address <input name="address" type="text">
-                </br>
-                Enter Your Phone   <input name="phone" type="text">
-                </br>
-                Enter Your Email   <input name="email" type="text">
-                <input type="submit">
+            <form name="Login Form" action = "signup.php" method="post">
+                <div id="login">
+                    <fieldset>
+                        <legend>SIGN UP</legend>
+                        <label> Username : <input name="name" type="text"><span>*</span></label>
+                        </br>
+                        <label>Password  : <input name="pass" type="password"><span>*</span></label></br>
+                        <label>Address   : <input name="address" type="text"><span>*</span></label></br>
+                        <label>Phone    : <input name="phone" type="text"><span>*</span></label></br>
+                        <label>Email    : <input name="email" type="text"><span>*</span></label></br> 
+                        <input type="submit" value="SIGN UP"><span> 
+                    </fieldset>
+                </div>           
             </form>
         </div>
     </body>
