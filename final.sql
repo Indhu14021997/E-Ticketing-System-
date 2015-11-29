@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2015 at 06:03 PM
+-- Generation Time: Nov 29, 2015 at 06:56 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -41,7 +41,9 @@ CREATE TABLE `booking` (
 
 INSERT INTO `booking` (`ID`, `date`, `seat_no`, `customerNo`, `Checked`, `ScheduleNo`) VALUES
 (1, '10/12/15', 231, 1, 1, 2),
-(2, '10/12.', 252, 2, 0, 2);
+(35, '10/12/15', 255, 2, 0, 2),
+(44, '10/12/15', 256, 2, 0, 2),
+(45, '12/12/12', 257, 2, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -84,8 +86,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `name`, `phone`, `address`, `mail`, `booked`) VALUES
-(1, 'Shanto', '01565-455623', 'Dhanmondi 11, Dhaka', 'shanto.56@hotmail.com', 0),
-(2, 'Eshan', '0125366985233\r\n', 'Bank Colony,Savar,Dhaka', 'atahjid@gmail.com', 0);
+(1, 'Shanto', '01565-455623', 'Dhanmondi 11, Dhaka', 'shanto.56@hotmail.com', 1),
+(2, 'Eshan', '0125366985233\r\n', 'Bank Colony,Savar,Dhaka', 'atahjid@gmail.com', 2);
 
 -- --------------------------------------------------------
 
@@ -143,6 +145,13 @@ CREATE TABLE `payment` (
   `Amount` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`customerNo`, `Amount`) VALUES
+(2, 1500);
+
 -- --------------------------------------------------------
 
 --
@@ -195,7 +204,6 @@ INSERT INTO `schedule` (`ScheduleNo`, `RouteNo`, `Arrival`, `Departure`, `trainN
 CREATE TABLE `seat` (
   `SeatNo` int(50) NOT NULL,
   `ClassNo` int(100) NOT NULL,
-  `TrainNo` int(100) NOT NULL,
   `empty` int(2) NOT NULL DEFAULT '0',
   `schedule` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -204,10 +212,17 @@ CREATE TABLE `seat` (
 -- Dumping data for table `seat`
 --
 
-INSERT INTO `seat` (`SeatNo`, `ClassNo`, `TrainNo`, `empty`, `schedule`) VALUES
-(102, 1, 5, 0, 3),
-(252, 1, 5, 0, 3),
-(253, 2, 5, 0, 2);
+INSERT INTO `seat` (`SeatNo`, `ClassNo`, `empty`, `schedule`) VALUES
+(102, 1, 0, 3),
+(252, 1, 0, 3),
+(253, 2, 0, 2),
+(254, 2, 0, 2),
+(255, 1, 1, 2),
+(256, 1, 1, 2),
+(257, 1, 1, 2),
+(258, 1, 0, 2),
+(259, 1, 0, 2),
+(260, 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -243,6 +258,15 @@ CREATE TABLE `ticket` (
   `BookingNo` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`TicketNo`, `BookingNo`) VALUES
+(1, 1),
+(2, 1),
+(3, 45);
+
 -- --------------------------------------------------------
 
 --
@@ -262,7 +286,7 @@ CREATE TABLE `train` (
 
 INSERT INTO `train` (`no`, `total_seat`, `trainName`, `freeSeat`) VALUES
 (3, 500, 'Mohanogor Provati', 300),
-(5, 295, 'DhakaRail156', 0);
+(5, 295, 'DhakaRail156', 284);
 
 --
 -- Indexes for dumped tables
@@ -342,7 +366,6 @@ ALTER TABLE `schedule`
 ALTER TABLE `seat`
   ADD PRIMARY KEY (`SeatNo`),
   ADD KEY `ClassNo` (`ClassNo`),
-  ADD KEY `TrainNo` (`TrainNo`),
   ADD KEY `schedule` (`schedule`);
 
 --
@@ -372,12 +395,12 @@ ALTER TABLE `train`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `ID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `route`
 --
@@ -388,6 +411,16 @@ ALTER TABLE `route`
 --
 ALTER TABLE `schedule`
   MODIFY `ScheduleNo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `seat`
+--
+ALTER TABLE `seat`
+  MODIFY `SeatNo` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
+--
+-- AUTO_INCREMENT for table `ticket`
+--
+ALTER TABLE `ticket`
+  MODIFY `TicketNo` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -422,8 +455,7 @@ ALTER TABLE `schedule`
 -- Constraints for table `seat`
 --
 ALTER TABLE `seat`
-  ADD CONSTRAINT `seat_ibfk_1` FOREIGN KEY (`ClassNo`) REFERENCES `class` (`classNo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `seat_ibfk_2` FOREIGN KEY (`TrainNo`) REFERENCES `train` (`no`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `seat_ibfk_1` FOREIGN KEY (`ClassNo`) REFERENCES `class` (`classNo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ticket`
