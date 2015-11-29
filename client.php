@@ -81,6 +81,22 @@ class client {
         }
     }
 
+    public function CheckBooking($schedule, $class, $seatAmounts) {
+        $query = "Select COUNT(*) from seat where seat.empty=0 and seat.schedule='" . $schedule . "' and seat.ClassNo='" . $class . "';";
+        // echo $query;
+        $result = $this->c->execute($this->conn, $query);
+        $row = $result->fetch_assoc();
+        // echo $row["COUNT(*)"]." ".$seatAmounts;
+        if ((int) $row["COUNT(*)"] >= $seatAmounts) {
+            $query = "Select TicketPrice from class where classNo='" . $class . "';";
+            $result = $this->c->execute($this->conn, $query);
+            $r = $result->fetch_assoc();
+            echo "Total Cost : " . $seatAmounts * $r["TicketPrice"];
+        } else {
+            echo "Not enought seats </br>";
+        }
+    }
+
     public function makeBooking($schedule, $class, $seatAmounts) {
         $query = "Select COUNT(*) from seat where seat.empty=0 and seat.schedule='" . $schedule . "' and seat.ClassNo='" . $class . "';";
         // echo $query;
@@ -88,10 +104,10 @@ class client {
         $row = $result->fetch_assoc();
         // echo $row["COUNT(*)"]." ".$seatAmounts;
         if ((int) $row["COUNT(*)"] >= $seatAmounts) {
-            $query="Select TicketPrice from class where classNo='".$class."';";
-            $result=$this->c->execute($this->conn, $query);
-            $r=$result->fetch_assoc();
-            echo "Total Cost : ".$seatAmounts*$r["TicketPrice"];
+            $query ="Select * from seat,schedule,class where schedule.ScheduleNo=" . $schedule . " and schedule.trainNo=seat.TrainNo and seat.empty=0 and class.classNo=" . $class . ";";;
+            $result = $this->c->execute($this->conn, $query);
+            $r = $result->fetch_assoc();
+            $cost = $seatAmounts * $r["TicketPrice"];
         } else {
             echo "Not enought seats </br>";
         }

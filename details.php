@@ -36,14 +36,19 @@ and open the template in the editor.
             $clientName = $client->getName($user);
             if ($client->exists($clientName)) {
                 $client->details($clientName);
-                if (isset($_POST['submit'])) /* i.e. the PHP code is executed only when someone presses Submit button in the below given HTML Form */ {
+                if (isset($_POST['submit'])) {
                     $_SESSION["seats"] = $_POST['seat'];
-                    // Here $var is the input taken from user.
+
                     $var = $_SESSION["seats"];
                     echo "Number of tickets : " . $var . "</br>";
-                    $client->makeBooking($schedule, $class, $var);
+                    $client->CheckBooking($schedule, $class, $var);
+                }
+                if (isset($_POST['sub'])) {
+                    echo"Submitted";
                 }
             }
+
+
 
             /*
              * 
@@ -67,13 +72,19 @@ and open the template in the editor.
             //echo"</br>";
             // echo $train;
             ?>
+
         </div>
         <div>
             <form name="seats" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <input type="text" name="seat">
                 <input type="submit" name="submit" >
             </form>
-   
+
+        </div>
+        <div>
+            <form name="sub" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <input type="submit" name="sub" >
+            </form>
         </div>
 
     </body>
