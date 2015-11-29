@@ -1,0 +1,31 @@
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 21, 2015, 8:22:27 PM
+    Author     : Fathe
+*/
+body{
+    background-color: appworkspace;
+}
+
+#login
+{
+
+    line-height: 2;
+    font-family: Times Roman; 
+    width: 350px;
+    background-color: white;
+    text-align: left;
+    float: right;
+
+}
+#header1
+{
+    background-color: aquamarine;
+    text-align: center;
+}
+
