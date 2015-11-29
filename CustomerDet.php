@@ -7,6 +7,14 @@
     <body>
         <div>
             <?php
+            include ("client.php");
+            session_start();
+            $user = $_SESSION["id"];
+            $client = new client();
+            $name = $client->getName($user);
+            $client->details($name);
+            echo '<a href="indexUser.html">Go back to the main page</a></br>';
+            echo '<a href="Home.html">Go back to the search page</a>.';
             ?>
         </div>
     </body>
