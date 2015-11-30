@@ -20,9 +20,10 @@ if ($result->num_rows > 0) {
         $val = $r->fetch_assoc();
         session_start();
         $_SESSION["id"] = $val["id"];
+        //  echo $val["id"];
         header('Location: CustomerProfile.html');
     } else if ($row["Class"] == 2) {
-        header('Location: admin1.php');
+        header('Location: Admin_Interface.html');
     }
 } else {
     echo "0 results\n";

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Schedule Details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            form label{
+                float: inside;
+                width: 15em;
+                text-align: left;
+                margin-right: 2em;
+                margin-left: 10em;
+                display: block
+            }
+
+        </style>
+    </head>
+    <body bgcolor = "#CCCCFF">
+        <center>
+            <img src="schedulebg_img.jpg" alt="Mountain View" style="width:800px;height:150px;">
+        
+        <form name = "schedule_details">
+            <div id="schedule_title">
+                 <center><h1 style="background: #0099CC"> Schedule Details </h1></center>
+            </div>
+            <br>
+            <label>Schedule Number :</label> <input type="text" name="scheduleNo"><br/><br>
+            <label>Route Number :</label> <input type="text" name="routeNo" ><br/><br>
+            <label>Arrival :</label> <input type="text" name="arrive" ><br/><br>
+            <label>Departure : </label> <input type="text" name="depart" ><br/><br>
+            <label>Train Number : </label> <input type="text" name="trainNo" ><br/><br>
+            <label>Station : </label> <input type="text" name="station" ><br/><br>
+            
+            <input id="add_schedule" type="button" value="Add" style="width:180px; height:30px; position:absolute; left:506px; top:610px; background: #99CCCC"/>
+            <input id="delete_schedule" type="button" value="Delete" style="width:180px; height:30px; position:absolute; left:675px; top:610px; background: #99CCCC"/> 
+            <input id="edit_schedule" type="button" value="Edit" style="width:180px; height:30px; position:absolute; left:847px; top:610px; background: #99CCCC"/> 
+
+        </form>
+        </center>
+
+    </body>
+</html>

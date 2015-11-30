@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Bangladesh Railway E-ticketing Service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script type="text/javascript">
+            function buttonClick_Schedule(){
+                window.location = "ScheduleDetails.html";
+            }
+            
+            function buttonClick_Route(){
+                window.location = "RouteDetails.html";
+            }
+            
+            function buttonClick_Admin(){
+                window.location = "AdminDetails.html";
+            }
+            
+            function buttonClick_LogOut(){
+                window.location = "login.html";
+            }
+        </script>
+    </head>
+    <body bgcolor = "#CCCCFF">
+        <div id="title">
+            <center><h1 style="background: #0099CC"> Welcome To Your Profile, Admin. </h1></center>
+        </div>
+        <br>
+        <img src="admin2_img.jpg" alt="Mountain View" style="width:1520px;height:400px;">
+        <input id="schedule" type="button" value="Schedule" style="width:180px; height:30px; position:absolute; left:421px; top:120px; background: #99CCCC" onclick = "buttonClick_Schedule()"/> 
+        <input id="route" type="button" value="Route" style="width:180px; height:30px; position:absolute; left:590px; top:120px; background: #99CCCC" onclick = "buttonClick_Route()"/> 
+        <input id="admin_details" type="button" value="Admin Details" style="width:180px; height:30px; position:absolute; left:762px; top:120px; background: #99CCCC" onclick = "buttonClick_Admin()"/> 
+        <input id="logout" type="button" value="Log Out" style="width:180px; height:30px; position:absolute; left:934px; top:120px; background: #99CCCC" onclick = "buttonClick_LogOut()"/>
+        
+        
+
+    </body>
+</html>

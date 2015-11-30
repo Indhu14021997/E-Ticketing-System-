@@ -10,6 +10,7 @@
             include ("client.php");
             session_start();
             $user = $_SESSION["id"];
+            //echo $user;
             $client = new client();
             $name = $client->getName($user);
             $client->details($name);

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Route Details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            form label{
+                float: inside;
+                width: 15em;
+                text-align: left;
+                margin-right: 2em;
+                margin-left: 10em;
+                display: block
+            }
+
+        </style>
+    </head>
+    <body bgcolor = "#CCCCFF">
+        <center>
+            <img src="routebg_img.jpg" alt="Mountain View" style="width:800px;height:250px;">
+        
+        <form name = "route_details">
+            <div id="route_title">
+                 <center><h1 style="background: #0099CC"> Route Details </h1></center>
+            </div>
+            <br>
+            <label>ID :</label> <input type="text" name="id"><br/><br>
+            <label>Source :</label> <input type="text" name="src" ><br/><br>
+            <label>Destination :</label> <input type="text" name="des" ><br/><br>
+            
+            <input id="add_route" type="button" value="Add" style="width:180px; height:30px; position:absolute; left:590px; top:580px; background: #99CCCC"/>
+            <input id="delete_route" type="button" value="Delete" style="width:180px; height:30px; position:absolute; left:759px; top:580px; background: #99CCCC"/> 
+
+        </form>
+        </center>
+
+    </body>
+</html>
