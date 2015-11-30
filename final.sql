@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 29, 2015 at 06:56 PM
+-- Generation Time: Nov 30, 2015 at 07:53 PM
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -40,10 +40,10 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`ID`, `date`, `seat_no`, `customerNo`, `Checked`, `ScheduleNo`) VALUES
-(1, '10/12/15', 231, 1, 1, 2),
-(35, '10/12/15', 255, 2, 0, 2),
-(44, '10/12/15', 256, 2, 0, 2),
-(45, '12/12/12', 257, 2, 0, 2);
+(51, '11/04/2015', 253, 2, 0, 2),
+(52, '11/04/2015', 254, 2, 0, 2),
+(53, '11/18/2015', 262, 2, 0, 2),
+(54, '12/03/2015', 291, 2, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -87,7 +87,10 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`id`, `name`, `phone`, `address`, `mail`, `booked`) VALUES
 (1, 'Shanto', '01565-455623', 'Dhanmondi 11, Dhaka', 'shanto.56@hotmail.com', 1),
-(2, 'Eshan', '0125366985233\r\n', 'Bank Colony,Savar,Dhaka', 'atahjid@gmail.com', 2);
+(2, 'Eshan', '0125366985233\r\n', 'Bank Colony,Savar,Dhaka', 'atahjid@gmail.com', 4),
+(3, 'test', 'test', 'test', 'test', 0),
+(4, 'Mubin', '0163698756', 'dhaka', 'atahjid@gmail.com', 1),
+(5, '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -120,8 +123,12 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`Name`, `Password`, `Class`) VALUES
+('', '', 1),
 ('admin', 'admin', 2),
-('Eshan', 'eshan', 1);
+('Eshan', 'eshan', 1),
+('Fathe', 'fathe', 1),
+('Mubin', 'mubin', 1),
+('test', 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -169,7 +176,12 @@ CREATE TABLE `route` (
 --
 
 INSERT INTO `route` (`id`, `source`, `destination`) VALUES
-(1, 'Dhaka', 'Chittagong');
+(1, 'Dhaka', 'Chittagong'),
+(2, 'Chittagong', 'Dhaka'),
+(3, 'Chittagong', 'Khulna'),
+(4, 'Dhaka', 'Khulna'),
+(5, 'Khulna', 'Dhaka'),
+(6, 'Khulna', 'Chittagong');
 
 -- --------------------------------------------------------
 
@@ -215,14 +227,48 @@ CREATE TABLE `seat` (
 INSERT INTO `seat` (`SeatNo`, `ClassNo`, `empty`, `schedule`) VALUES
 (102, 1, 0, 3),
 (252, 1, 0, 3),
-(253, 2, 0, 2),
-(254, 2, 0, 2),
-(255, 1, 1, 2),
-(256, 1, 1, 2),
-(257, 1, 1, 2),
+(253, 2, 1, 2),
+(254, 2, 1, 2),
+(255, 1, 0, 2),
+(256, 1, 0, 2),
+(257, 1, 0, 2),
 (258, 1, 0, 2),
 (259, 1, 0, 2),
-(260, 1, 0, 2);
+(260, 1, 0, 2),
+(261, 2, 0, 2),
+(262, 3, 1, 2),
+(263, 3, 0, 2),
+(264, 3, 0, 2),
+(265, 3, 0, 2),
+(266, 3, 0, 2),
+(267, 3, 0, 2),
+(268, 3, 0, 2),
+(269, 3, 0, 2),
+(270, 3, 0, 2),
+(271, 3, 0, 2),
+(272, 3, 0, 2),
+(273, 3, 0, 2),
+(274, 3, 0, 2),
+(275, 2, 0, 2),
+(276, 3, 0, 2),
+(277, 2, 0, 2),
+(278, 2, 0, 2),
+(279, 2, 0, 2),
+(280, 2, 0, 2),
+(281, 2, 0, 2),
+(282, 2, 0, 2),
+(283, 2, 0, 2),
+(284, 2, 0, 2),
+(285, 2, 0, 2),
+(286, 2, 0, 2),
+(287, 2, 0, 2),
+(288, 3, 0, 3),
+(289, 3, 0, 3),
+(290, 1, 0, 3),
+(291, 2, 1, 3),
+(292, 2, 0, 3),
+(293, 1, 0, 3),
+(294, 2, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -263,9 +309,10 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`TicketNo`, `BookingNo`) VALUES
-(1, 1),
-(2, 1),
-(3, 45);
+(9, 51),
+(10, 52),
+(11, 53),
+(12, 54);
 
 -- --------------------------------------------------------
 
@@ -285,8 +332,8 @@ CREATE TABLE `train` (
 --
 
 INSERT INTO `train` (`no`, `total_seat`, `trainName`, `freeSeat`) VALUES
-(3, 500, 'Mohanogor Provati', 300),
-(5, 295, 'DhakaRail156', 284);
+(3, 500, 'Mohanogor Provati', 297),
+(5, 295, 'DhakaRail156', 278);
 
 --
 -- Indexes for dumped tables
@@ -395,17 +442,17 @@ ALTER TABLE `train`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `ID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `ID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `route`
 --
 ALTER TABLE `route`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `schedule`
 --
@@ -415,12 +462,12 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `seat`
 --
 ALTER TABLE `seat`
-  MODIFY `SeatNo` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
+  MODIFY `SeatNo` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `TicketNo` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `TicketNo` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --
