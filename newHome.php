@@ -3,35 +3,31 @@
         <title>User Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="Status.css"/>
     </head>
     <body>
+         <div>
+                <h1>Railway</h1>
+                <p>E-Ticketing Service</p>
+            </div>
         <div>
-
             <?php
-            include ("connect.php");
+            include ("client.php");
             session_start();
-            // echo $_SESSION["id"];
             $source = $_POST["source"];
             $dest = $_POST["dest"];
-            $query = "Select * from route,schedule,station,train where route.source=\"" . $source . "\" and route.destination=\"" . $dest . "\" and route.id=schedule.RouteNo and schedule.station=station.id and schedule.trainNo=train.no;";
-            echo "Source : " . $source . " Destination : " . $dest . "</br>";
-            $c = new connect();
-            $conn = $c->con();
-            $result = $c->execute($conn, $query);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo $row["name"] . "  " . $row["Location"] . "  " . $row["Arrival"] . "  " . $row["Departure"] . "  " . $row["trainName"] . "  " . $row["freeSeat"] . "</br>";
-                    //$_SESSION['sVar'] = $row["name"];
-                }
-            } else {
-                echo "0 results\n";
-            }
-            echo '<a href="index.html">Go back to the main page</a></br>.';
-            echo '<a href="Home.html">Go back to the search page</a>.';
+            $client = new client();
+            echo "<table style=\"border:1px solid black; border-collapse:collapse;\" width=\"1350\" height=\"100\"> ";
+            echo "<th width=\"200\" bgcolor=\"#0000FF\">Train Schedule</th>";
+            echo "<tr>";
+            $client->getRawSchedule($source, $dest);
+            echo "</tr>";
+            echo "</table>";
             ?>
-
-
         </div>
+        <div id="back">
+            <a href="index.html">Go back to the main page</a></br>
+            <a href="newHome.html">Go back to the search page</a></div>
     </body>
 </html>
 

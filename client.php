@@ -24,7 +24,7 @@ class client {
     }
 
     public function submit($name, $pass, $phone, $address, $mail) {
-        if (!self::exists($name)) {
+        if (!self::exists($name) && !self::existsMail($mail) && !self::exists($phone)) {
             $query1 = "Insert into login values('" . $name . "','" . $pass . "','1');";
             $query2 = "Insert into customer values(NULL,'" . $name . "','" . $phone . "','" . $address . "','" . $mail . "',0);";
             //echo $query2;
@@ -37,6 +37,24 @@ class client {
 
     public function exists($name) {
         $query = "Select Name from login where Name='" . $name . "';";
+        $result = $this->c->execute($this->conn, $query);
+        if ($result->num_rows > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function existsMail($mail) {
+        $query = "Select mail from customer where mail='" . $mail . "';";
+        $result = $this->c->execute($this->conn, $query);
+        if ($result->num_rows > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function existsPhone($phone) {
+        $query = "Select phone from customer where phone='" . $phone . "';";
         $result = $this->c->execute($this->conn, $query);
         if ($result->num_rows > 0) {
             return true;
@@ -60,12 +78,24 @@ class client {
             $result = $this->c->execute($this->conn, $query);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                echo "ID : " . $row["id"] . "</br>";
-                echo "Name : " . $row["name"] . "</br>";
-                echo "Phone : " . $row["phone"] . "</br>";
-                echo "Address : " . $row["address"] . "</br>";
-                echo "Email : " . $row["mail"] . "</br>";
-                echo "Booked : " . $row["booked"] . "</br>";
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\"> " . "ID : " . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["id"] . "</td></br>";
+                echo "</tr>\n";
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\"> " . "Name : " . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["name"] . "</td></br>";
+                echo "</tr>\n";
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\"> " . "Phone : " . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["phone"] . "</td></br>";
+                echo "</tr>\n";
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\"> " . "Address : " . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["address"] . "</td></br>";
+                echo "</tr>\n";
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\"> " . "Email : " . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["mail"] . "</td></br>";
+                echo "</tr>\n";
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\"> " . "Booked : " . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["booked"] . "</td></br>";
+                echo "</tr>\n";
             }
         }
     }
@@ -82,6 +112,25 @@ class client {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>\n";
                 echo "<td style=\"border:1px solid black;\">" . '<a href="details.php?name=' . $row["name"] . '&schedule=' . $row["ScheduleNo"] . '">' . " " . $row["trainName"] . "</a></td>" . "<td style=\"border:1px solid black;\"> " . $row["Location"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["Arrival"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["Departure"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["name"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["freeSeat"] . "</td></br>";
+                echo "</tr>\n";
+            }
+        } else {
+            echo "0 results\n";
+        }
+    }
+
+    public function getRawSchedule($source, $destination) {
+        $_SESSION["schedule"] = NULL;
+        $query = "Select * from route,schedule,station,train where route.source=\"" . $source . "\" and route.destination=\"" . $destination . "\" and route.id=schedule.RouteNo and schedule.station=station.id and schedule.trainNo=train.no and train.freeSeat>0;";
+        $result = $this->c->execute($this->conn, $query);
+        echo "<tr>\n";
+        echo "<td style=\"border:1px solid black;\"> " . "Train Name" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Source" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Arrival time" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Departure time" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Station" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Free seats" . "</td>";
+        echo "</tr>\n";
+        if ($result->num_rows > 0) {
+
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\">" . $row["trainName"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["Location"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["Arrival"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["Departure"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["name"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["freeSeat"] . "</td></br>";
                 echo "</tr>\n";
             }
         } else {

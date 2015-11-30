@@ -16,6 +16,15 @@ and open the template in the editor.
             form{box-alignment: left;}
 
         </style>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
     </head>
     <body>
         <div id="header">
@@ -26,15 +35,36 @@ and open the template in the editor.
             <form action="Home.php" method="post">
                 <div id="submission">
                     <fieldset>
-                        <label> Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="source" type="text"><span>*</span></label>
+                        <label> Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="source" type="text" list="source"><datalist id="source">
+                                <option value="Dhaka">
+                                <option value="Chittagong">
+                                <option value="Khulna">
+                                <option value="Rajshahi">
+                                <option value="Barishal">
+                                <option value="Sylhet">
+                            </datalist>
+                            <span>*</span></label>
                         </br>
-                        <label>Destination&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="dest" type="text"><span>*</span></label>
+                        <label>Destination&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="dest" type="text" list="dest"><datalist id="dest">
+                                <option value="Dhaka">
+                                <option value="Chittagong">
+                                <option value="Khulna">
+                                <option value="Rajshahi">
+                                <option value="Barishal">
+                                <option value="Sylhet">
+                            </datalist>
+                            <span>*</span></label>
                         </br>
-                        <label>Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="date" type="date"/><span>*</span></label>
+                        <label>Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="date" type="text" id="datepicker"/><span>*</span></label>
                         </br>
-                        <label>Preferred Class&nbsp; <input name="class" type="text"><span>*</span></label></br>
+                        <label>Preferred Class&nbsp; <input name="class" type="text" list="class"> <datalist id="class">
+                                <option value="1">
+                                <option value="2">
+                                <option value="3">
+                            </datalist>
+                            <span>*</span></label></br>
                         <input type="submit" value="submit"><span> 
-                            <a href="index.html">Go back to the main page</a></br>
+                            <a href="CustomerProfile.html">Go back to the main page</a></br>
                     </fieldset>
                 </div>
             </form>
