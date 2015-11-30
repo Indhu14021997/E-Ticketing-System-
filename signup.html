@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>login</title>
+        <title>sign up</title>
         <link rel="stylesheet" type="text/css" href="Login.css"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,16 +20,21 @@ and open the template in the editor.
     <body>
         <div>
             <form name="Login Form" action = "signup.php" method="post">
-                <div id="login">
+                <div id="header">
+                    <h1>Railway</h1>
+                    <p>E-Ticketing Service</p>
+                </div>
+                <div id="signup">
                     <fieldset>
                         <legend>SIGN UP</legend>
-                        <label> Username : <input name="name" type="text"><span>*</span></label>
+                        <label>Username : <input name="name" type="text"><span>*</span></label>
                         </br>
-                        <label>Password  : <input name="pass" type="password"><span>*</span></label></br>
-                        <label>Address   : <input name="address" type="text"><span>*</span></label></br>
-                        <label>Phone    : <input name="phone" type="text"><span>*</span></label></br>
-                        <label>Email    : <input name="email" type="text"><span>*</span></label></br> 
+                        <label>Password &nbsp;: <input name="pass" type="password"><span>*</span></label></br>
+                        <label>Address  &nbsp;&nbsp;&nbsp; : <input name="address" type="text"><span>*</span></label></br>
+                        <label>Phone &nbsp; &nbsp; &nbsp;&nbsp; : <input name="phone" type="text"><span>*</span></label></br>
+                        <label>Email  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; : <input name="email" type="text"><span>*</span></label></br> 
                         <input type="submit" value="SIGN UP"><span> 
+                            <a href="index.html">Go back to the main page</a></br>
                     </fieldset>
                 </div>           
             </form>

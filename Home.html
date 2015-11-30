@@ -8,21 +8,38 @@ and open the template in the editor.
     <head>
         <title>User Home</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="Login.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css" >
+            h2{letter-spacing: 10px; font-size: .2in}
+            span{color: red}
+            form{box-alignment: left;}
+
+        </style>
     </head>
     <body>
+        <div id="header">
+            <h1>Railway</h1>
+            <p>E-Ticketing Service</p>
+        </div>
         <div>
             <form action="Home.php" method="post">
-                Enter Your Source <input name="source" type="text">
-                </br>
-                Enter Destination <input name="dest" type="text">
-                </br>
-                Enter Date <input name="date" type="text">
-                </br>
-                Enter Preferred Class <input name="class" type="text">
-                <input type="submit">
-
+                <div id="submission">
+                    <fieldset>
+                        <label> Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="source" type="text"><span>*</span></label>
+                        </br>
+                        <label>Destination&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="dest" type="text"><span>*</span></label>
+                        </br>
+                        <label>Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="date" type="date"/><span>*</span></label>
+                        </br>
+                        <label>Preferred Class&nbsp; <input name="class" type="text"><span>*</span></label></br>
+                        <input type="submit" value="submit"><span> 
+                            <a href="index.html">Go back to the main page</a></br>
+                    </fieldset>
+                </div>
             </form>
+
+
         </div>
     </body>
 </html>

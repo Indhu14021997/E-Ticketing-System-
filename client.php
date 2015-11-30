@@ -73,11 +73,16 @@ class client {
     public function getSchedule($source, $destination) {
         $_SESSION["schedule"] = NULL;
         $query = "Select * from route,schedule,station,train where route.source=\"" . $source . "\" and route.destination=\"" . $destination . "\" and route.id=schedule.RouteNo and schedule.station=station.id and schedule.trainNo=train.no and train.freeSeat>0;";
-        // echo $query;
         $result = $this->c->execute($this->conn, $query);
+        echo "<tr>\n";
+        echo "<td style=\"border:1px solid black;\"> " . "Train Name" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Source" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Arrival time" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Departure time" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Station" . "</td>" . "<td style=\"border:1px solid black;\"> " . "Free seats" . "</td>";
+        echo "</tr>\n";
         if ($result->num_rows > 0) {
+
             while ($row = $result->fetch_assoc()) {
-                echo '<a href="details.php?name=' . $row["name"] . '&schedule=' . $row["ScheduleNo"] . '">' . $row["name"] . "  " . $row["Location"] . "  " . $row["Arrival"] . "  " . $row["Departure"] . "  " . $row["trainName"] . "  " . $row["freeSeat"] . "</a></br>";
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\">" . '<a href="details.php?name=' . $row["name"] . '&schedule=' . $row["ScheduleNo"] . '">' . " " . $row["trainName"] . "</a></td>" . "<td style=\"border:1px solid black;\"> " . $row["Location"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["Arrival"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["Departure"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["name"] . "</td>" . "<td style=\"border:1px solid black;\"> " . $row["freeSeat"] . "</td></br>";
+                echo "</tr>\n";
             }
         } else {
             echo "0 results\n";
@@ -162,8 +167,6 @@ class client {
         $result = $this->c->execute($this->conn, $query);
         $row = $result->fetch_assoc();
         $mail = "\"" . $row["mail"] . "\"";
-        //echo $mail;
-        //echo $string;
         if (mail($mail, 'Booking Made', $string)) {
             echo "done";
         }
@@ -171,13 +174,12 @@ class client {
 
     public function listBookings($id) {
         $query = "Select * from booking,schedule,route,train,class,seat,payment where booking.customerNo=" . $id . " and booking.ScheduleNo=schedule.ScheduleNo and schedule.routeNo=route.id and schedule.trainNo=train.no and booking.seat_no=seat.SeatNo and seat.ClassNo=class.classNo and payment.customerNo=booking.customerNo;";
-        // echo $query;
         $result = $this->c->execute($this->conn, $query);
         if ($result->num_rows > 0) {
             echo "<table style=\"border:1px solid black; border-collapse:collapse;\" width=\"1350\"> \n";
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>\n";
-                echo "<td style=\"border:1px solid black;\">" . $row["date"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["seat_no"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["trainName"] . "</td>"."<td style=\"border:1px solid black;\">" . $row["Arrival"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["Departure"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["source"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["destination"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["ClassName"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["TicketPrice"] . "</td>" . "</br>";
+                echo "<td style=\"border:1px solid black;\">" . $row["date"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["seat_no"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["trainName"] . "</td>" . "<td style=\"border:1px solid black;\">" . $row["Arrival"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["Departure"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["source"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["destination"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["ClassName"] . "</td>" . " " . "<td style=\"border:1px solid black;\">" . $row["TicketPrice"] . "</td>" . "</br>";
                 echo "</tr>\n";
             }
         }

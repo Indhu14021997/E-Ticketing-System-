@@ -21,7 +21,12 @@ body{
     background: greenyellow;
     width: 3000px;
     float: right;
-    
+
+}
+#head{
+    width: 3000px;
+    text-align:center;
+
 }
 #back{
     font-size: .3in;

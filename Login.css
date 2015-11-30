@@ -9,23 +9,60 @@ and open the template in the editor.
     Author     : Fathe
 */
 body{
-    background-color: appworkspace;
+    background-color: palegreen;
 }
 
-#login
-{
+#login{
 
     line-height: 2;
     font-family: Times Roman; 
     width: 350px;
     background-color: white;
-    text-align: left;
-    float: right;
+    text-align: center;
+    position:absolute;
+    height:200px;
+    z-index:15;
+    top:50%;
+    left:50%;
+    margin:-100px 0 0 -150px;
+
 
 }
-#header1
+
+#signup{
+
+    line-height: 2;
+    font-family: Times Roman; 
+    width: 350px;
+    background-color: white;
+    text-align: center;
+    position:absolute;
+    height:250px;
+    z-index:15;
+    top:50%;
+    left:50%;
+    margin:-100px 0 0 -150px;
+
+}
+#submission{
+
+    line-height: 2;
+    font-family: Times Roman; 
+    width: 350px;
+    background-color: white;
+    text-align: center;
+    position:absolute;
+    height:250px;
+    z-index:15;
+    top:50%;
+    left:50%;
+    margin:-100px 0 0 -150px;
+
+}
+
+#header
 {
-    background-color: aquamarine;
+    background-color: buttonface;
     text-align: center;
 }
 
