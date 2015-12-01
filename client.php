@@ -234,4 +234,19 @@ class client {
         }
     }
 
+    public function listNotice($id) {
+        $query = "Select * from booking,Notice where booking.customerNo='" . $id . "' and booking.ScheduleNo=Notice.ScheduleNo;";
+        //echo $query;
+        $result = $this->conn->query($query);
+        if ($result->num_rows > 0) {
+            echo "<table style=\"border:1px solid black; border-collapse:collapse;\" width=\"1350\"> \n";
+            echo "<td style=\"border:1px solid black;\">" . "Notice" . "</td>" . "<br>";
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>\n";
+                echo "<td style=\"border:1px solid black;\">" . $row["Notice"] . "</td>" . "<br>";
+                echo "</tr>\n";
+            }
+        }
+    }
+
 }

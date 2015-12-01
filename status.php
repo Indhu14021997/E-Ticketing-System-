@@ -55,6 +55,7 @@
                     $client = new client();
                     $name = $client->getName($user);
                     $client->listBookings($user);
+                    $client->listNotice($user);
                     ?>
                 </tr>
             </table>
