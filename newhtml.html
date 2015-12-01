@@ -6,17 +6,68 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Schedule Details</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script language="javascript" type="text/javascript" src="datetimepicker.js">
+        </script>
+        <style>
+            form label{
+                float: inside;
+                width: 15em;
+                text-align: left;
+                margin-right: 2em;
+                margin-left: 10em;
+                display: block
+            }
+
+        </style>
+
+        <script type="text/javascript">
+            function buttonClick_Show() {
+                window.location = "ShowSchedule.php";
+            }
+            function buttonClick_Add() {
+                document.schedule_details.action = "AddSchedule.php"
+                document.schedule_details.target = "_blank";
+                document.schedule_details.submit();
+            }
+            function buttonClick_Delete() {
+                document.schedule_details.action = "DeleteSchedule.php"
+                document.schedule_details.target = "_blank";
+                document.schedule_details.submit();
+            }
+
+            function buttonClick_Edit() {
+                document.schedule_details.action = "EditSchedule.php"
+                document.schedule_details.target = "_blank";
+                document.schedule_details.submit();
+            }
+        </script>
     </head>
-    <body>
-         <script>
-                document.forms['seats'].addEventListener('submit', function (event) {
-                    this.style['display'] = 'none';
-                    event.preventDefault();
-                });
-            </script>
-        <div>TODO write content</div>
-    </body>
+    <body bgcolor = "#CCCCFF">
+    <center>
+        <img src="schedulebg_img.jpg" alt="Mountain View" style="width:800px;height:150px;">
+
+        <form name = "schedule_details" method="post">
+            <div id="schedule_title">
+                <center><h1 style="background: #0099CC"> Schedule Details </h1></center>
+            </div>
+            <br>
+            <label>Schedule Number :</label> <input type="text" name="scheduleNo"><br/><br>
+            <label>Route Number :</label> <input type="text" name="routeNo" ><br/><br>
+            <label>Arrival :</label> <input name="arrive" id="demo2" type="text" size="25"><a href="javascript:NewCal('demo2','ddmmmyyyy',true,12)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a><br/><br>
+            <label>Departure : </label> <input type="text" name="depart" ><br/><br>
+            <label>Train Number : </label> <input type="text" name="trainNo" ><br/><br>
+            <label>Station : </label> <input type="text" name="station" ><br/><br>
+
+            <input id="show_schedule" type="button" value="Show Schedule" style="width:180px; height:30px; position:absolute; left:350px; top:610px; background: #99CCCC" onclick = "buttonClick_Show()"/>
+            <input id="add_schedule" name = "add" type="submit" value="Add" style="width:180px; height:30px; position:absolute; left:519px; top:610px; background: #99CCCC" onclick = "return buttonClick_Add()"/>
+            <input id="delete_schedule" name = "delete" type="submit" value="Delete" style="width:180px; height:30px; position:absolute; left:688px; top:610px; background: #99CCCC" onclick = "return buttonClick_Delete()"/> 
+            <input id="edit_schedule" name = "edit" type="submit" value="Edit" style="width:180px; height:30px; position:absolute; left:857px; top:610px; background: #99CCCC" onclick = "return buttonClick_Edit()"/> 
+
+        </form>
+    </center>
+
+</body>
 </html>

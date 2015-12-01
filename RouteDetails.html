@@ -20,25 +20,45 @@ and open the template in the editor.
             }
 
         </style>
+
+        <script type="text/javascript">
+            function buttonClick_Show() {
+                window.location = "ShowRoute.php";
+            }
+            function buttonClick_Add() {
+                document.route_details.action = "AddRoute.php"
+                document.route_details.target = "_blank";
+                document.route_details.submit();
+            }
+            function buttonClick_Delete() {
+                document.route_details.action = "DeleteRoute.php"
+                document.route_details.target = "_blank";
+                document.route_details.submit();
+            }
+        </script>
     </head>
     <body bgcolor = "#CCCCFF">
-        <center>
-            <img src="routebg_img.jpg" alt="Mountain View" style="width:800px;height:250px;">
-        
-        <form name = "route_details">
+    <center>
+        <img src="routebg_img.jpg" alt="Mountain View" style="width:800px;height:250px;">
+
+        <form name = "route_details" method="post">
             <div id="route_title">
-                 <center><h1 style="background: #0099CC"> Route Details </h1></center>
+                <center><h1 style="background: #0099CC"> Route Details </h1></center>
             </div>
             <br>
             <label>ID :</label> <input type="text" name="id"><br/><br>
             <label>Source :</label> <input type="text" name="src" ><br/><br>
             <label>Destination :</label> <input type="text" name="des" ><br/><br>
-            
-            <input id="add_route" type="button" value="Add" style="width:180px; height:30px; position:absolute; left:590px; top:580px; background: #99CCCC"/>
-            <input id="delete_route" type="button" value="Delete" style="width:180px; height:30px; position:absolute; left:759px; top:580px; background: #99CCCC"/> 
+
+            <input id="show_route" type="button" value="Show Routes" style="width:180px; height:30px; position:absolute; left:500px; top:580px; background: #99CCCC" onclick = "buttonClick_Show()"/>
+            <input id="add_route" type="submit" value="Add" style="width:180px; height:30px; position:absolute; left:669px; top:580px; background: #99CCCC" onclick = "return buttonClick_Add()"/>
+            <input id="delete_route" type="submit" value="Delete" style="width:180px; height:30px; position:absolute; left:838px; top:580px; background: #99CCCC" onclick = "return buttonClick_Delete()"/> 
 
         </form>
-        </center>
+    </center>
+    <div>
+        <a href="Admin_Interface.html">Go back to the main page</a>
+    </div>
 
-    </body>
+</body>
 </html>

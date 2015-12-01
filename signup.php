@@ -29,14 +29,14 @@ and open the template in the editor.
                 echo "Sign up completed";
                 echo "</br>";
                 $client->details($name);
+                 echo '<a href="CustomerProfile.html">Go to User Home</a></br>';
             } else {
                 echo "User with given information already exists";
+                echo '<a href="index.html">Go to the home page</a>.</br>';
+                echo '<a href="signup.html">Go back to signup page</a></br>';
                 echo "</br>";
             }
-
-            echo '<a href="index.html">Go to the home page</a>.';
             ?>
-
         </div>
     </body>
 </html>

@@ -28,8 +28,7 @@
             </table>
         </div><div>
             <a href="CustomerProfile.html">Go back to the main page</a>
-            </br>
-            <a href="Home.html">Go back to the search page</a>
+
         </div>
     </body>
 </html>
